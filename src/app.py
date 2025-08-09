@@ -39,6 +39,33 @@ activities = {
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
     }
+    # Deportivas
+    "futbol": {
+        "type": "deporte",
+        "participants": []
+    },
+    "baloncesto": {
+        "type": "deporte",
+        "participants": []
+    },
+    # Artísticas
+    "pintura": {
+        "type": "artistica",
+        "participants": []
+    },
+    "teatro": {
+        "type": "artistica",
+        "participants": []
+    },
+    # Intelectuales
+    "ajedrez": {
+        "type": "intelectual",
+        "participants": []
+    },
+    "debate": {
+        "type": "intelectual",
+        "participants": []
+    },
 }
 
 
@@ -61,6 +88,9 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+    # Validar que el estudiante no esté ya registrado
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already registered")
 
     # Add student
     activity["participants"].append(email)
